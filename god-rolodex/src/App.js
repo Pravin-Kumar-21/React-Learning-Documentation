@@ -1,26 +1,22 @@
+// now this is how we are going to use class component in react 
+// first import component from react 
+import { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// Remeber this is a functional Component in React .... 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-// next we will learn what is a class component in react and how it is used
+class App extends Component {  // now in case of a functional component we just return the HTML but in case of class component you 
+  // have to use render() and then return the html template
+  render(){
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>
+           Hello React Developer's ? What are you building...
+          </p>
+        </header>
+      </div>
+    );
+  }
+  }
 
 export default App;
