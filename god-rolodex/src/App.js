@@ -5,42 +5,42 @@
 // of the set state we pass a function inside the setstate
 // setstate(() => {}, () => {}) the first function is the arugument function and the second function is the callback function
 
-// like this 
+// Starting the project God Rolodex > Now we will learn how to map array to elements
 import { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-class App extends Component {  // now in case of a functional component we just return the HTML but in case of class component you 
-  // have to use render() and then return the html template
+class App extends Component {  
   constructor(){
     super();
-   this.state ={
-    Name : {firstname:"Pravin", lastname: "Kumar"}, // i have use an object here so in usestate i will also *
-    role: "Full Stack Developer", // suppose here i can use here the object also 
+   this.state ={ // this we have created an array of user 
+    user: [],
    };
   }
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users') // this will return a promise 
+    .then((response) => response.json())    // it will also return a promise 
+    .then((users) => this.setState(() => { // now we use setstate to save the user json data format
+      return { user : users };
+    },
+    () => {
+      console.log(this.state);
+    }
+  ));
+  };
   render(){
     return (
       <div className="App">
         <header className="App-header">
-          <p className='title'>Hello React Developers ? What are you building...</p>
-          <p>My name is {this.state.Name.firstname} {this.state.Name.lastname} , I work as a {this.state.role}  </p>
-          <button onClick={()=> 
-          {
-              this.setState(() =>{
-                return { 
-                  Name:{firstname:"Navin",lastname:"Kumar"}
-                };
-              }, // first function completion which is the argument 
-              () => {
-                  console.log(this.state);
-                } // second function which is the callback function
-              );
-          }} // Now the setstate() will be up to date
-          > Click Here </button>
-        </header>
+          {this.state.user.map((g) => {
+            return (
+            <div  key={g.id}>
+              <p>{g.username}</p>
+            </div>
+          );
+          })
+          }
+        </header>   
       </div>
-    );
-  }
-  }
-
+    )
+  }};
 export default App;
