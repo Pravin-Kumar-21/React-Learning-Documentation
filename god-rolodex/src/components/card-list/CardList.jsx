@@ -1,26 +1,19 @@
 import React from 'react'
-import App from '../../App';
-import '../../App.css';
-const CardList = () => {
-  return (
-    <div className="App">
-      <input className='search-box' 
-        type='search' 
-        placeholder='Search Users' 
-        onChange={App.onserchChange} // here removed this.
-        />
-        <header className="App-header">
-          {App.filterUsers.map((g) => {
-            return (
-            <div  key={g.id}>
-              <p>{g.name}</p>
-            </div>
-          );
-          })
-          }
-        </header>   
-      </div>
-  )
-}
+import { Component } from 'react';
+import '../../App.css'
 
+class CardList extends Component{
+  render(){
+    const {users} = this.props
+    console.log(users)
+    return(
+      <div className='App'>
+      <div ></div>
+        {users.map((g) => {
+          return <h1 key= {g.id}>{g.name}</h1>
+        })}
+      </div>
+    )
+  }
+}
 export default CardList;
