@@ -45,8 +45,12 @@ class App extends Component {
     // instead of using this.state everywhere what we can do is 
     return (
       <div className='App'>
-        <SearchBox onchangeHandler ={this.onSearchChange} className='Search-box' placeholder='Search Users'/>
+      <div>
+        <SearchBox onchangeHandler ={this.onSearchChange} className='User-Search-box' placeholder='Search Users'/>
+      </div>
+      <div>
         <CardList users={filteredUsers} />
+      </div>
       </div>
     );
   }
