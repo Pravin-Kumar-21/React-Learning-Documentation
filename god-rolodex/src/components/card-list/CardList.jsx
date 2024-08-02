@@ -7,8 +7,13 @@ import Card from './../card/card'
 class CardList extends Component{
   render(){
     const {users} = this.props
+    console.log(users)
     return(
-        <Card objects={users}/>
+      <div className='card-list' >
+      {users.map((g) => {
+        return <Card objects ={g}/>
+      })}
+      </div>
     )
 }
 };

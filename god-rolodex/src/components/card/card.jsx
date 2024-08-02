@@ -3,18 +3,14 @@ import './card.css'
 class Card extends Component{
 render()
 {
-    const {objects} = this.props;
+    const {name , id , email} = this.props.objects;
     return(
-        <div className='card-list' >
-            {objects.map((g) => (
-            <div className='card-container' key={g.id}>
-            <img alt={`user: ${g.name}`} src={`https://robohash.org/${g.id}?set=set3&size=200x200`}/>
-            <h3>{g.name}</h3>
-            <p>{g.email}</p>
-            </div>  
-            ))}
-        </div>
-    )
+        <div className='card-container' key={id}>
+            <img alt={`user: ${name}`} src={`https://robohash.org/${id}?set=set3&size=200x200`}/>
+            <h3>{name}</h3>
+            <p>{email}</p>
+        </div>  
+        )
 
 }
 };
