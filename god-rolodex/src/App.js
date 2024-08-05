@@ -1,6 +1,6 @@
 import { useState ,useEffect} from 'react';
-import React, { Component } from 'react';
-import logo from './logo.svg';
+// import React, { Component } from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import CardList from './components/card-list/CardList.jsx';
 import SearchBox from './components/search-box/SearchBox.jsx';
@@ -86,7 +86,11 @@ const App = ()=>{
   const [searchvalue,setString] = useState('');
 
   const [users, setUsers] = useState([]);
-  // this is causing infinite rendering of the function to stop this we need to use useEffect hook
+
+  const[stringField , setStringField] = useState('');
+
+  const [FilteredUsers, setFilteruser] = useState(users);
+
   // fetch('https://jsonplaceholder.typicode.com/users') // this is a side effect that is generated using  
   // .then((response) => response.json())   
   // .then((users) => {
@@ -96,6 +100,9 @@ const App = ()=>{
   // useEffect consists of two arguments the first one is 
   // 1. callback Function: this can be use api call , updating a component
   // 2. array of dependencies : the callback function will run only if this dependency array value is changed , if it is empty then it will behave similar to componentdidmount 
+
+
+
  useEffect(() => {
   fetch('https://jsonplaceholder.typicode.com/users')
     .then((response) => response.json())   
@@ -107,6 +114,16 @@ const App = ()=>{
       setUsers(modifiedUsers);
     });
 }, []);
+
+
+const filteredUsers = users.filter(user => { //
+    return user.name.toLowerCase().includes(searchvalue);
+  });
+
+  const onStringChange = (event) =>{
+    setStringField(event.target.value);
+  }
+
   const onSearchChange = (event) => { // created an event that take value from event 
     const searchString = event.target.value.toLowerCase(); // created a searchstring variable and stored lower case characters of event.target.value 
     setString(searchString); // passed it to the setString function where it will update the value to the usestate hook
@@ -114,19 +131,33 @@ const App = ()=>{
   // filter command works by creating a new filtered array in return when we are filtering something from an array 
   //user => stores the users with the condition 
   // filter user will store the filtered users from the array
-  const filteredUsers = users.filter(user => { //
+  
+  useEffect(() =>{
+    const newfilteredUsers = users.filter(user => { //
     return user.name.toLowerCase().includes(searchvalue);
   });
+  setFilteruser(newfilteredUsers);
+  console.log('Effect is Firing');
+  },[users,searchvalue]
+  )
+  
       return (
     <div className='App'>
       <h1 className='app-title'>Robots Rolodex</h1>
       <div>
-      {console.log({filteredUsers})}
+
         <SearchBox 
           onchangeHandler ={onSearchChange} 
           className='User-Search-box' 
           placeholder='Search Users'
         />
+
+          <SearchBox 
+          onchangeHandler ={onStringChange} 
+          placeholder='Set String'
+        />
+
+
         <CardList users={filteredUsers} />
       </div>
     </div>

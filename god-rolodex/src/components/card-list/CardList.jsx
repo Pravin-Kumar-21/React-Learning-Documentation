@@ -3,18 +3,13 @@ import { Component } from 'react';
 import '../../App.css'
 import './CardList.css'
 import Card from './../card/card'
-
-class CardList extends Component{
-  render(){
-    const {users} = this.props
-    console.log(users)
-    return(
-      <div className='card-list' >
-      {users.map((g) => {
-        return <Card objects ={g} key={g.id}/>
-      })}
-      </div>
-    )
-}
+const CardList = ({users}) =>{
+ return(
+  <div className='card-list'  >
+  {users.map((user) => (
+    <Card user={user} key={user.id}/>
+  ))}
+  </div>
+ );
 };
 export default CardList;
