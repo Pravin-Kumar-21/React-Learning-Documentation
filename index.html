@@ -1,0 +1,49 @@
+// This how we use React with Raw HTML and Raw Javascript
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        React is not Rendered
+    </div>
+    <script src="https://unpkg.com/react@18.0.0-rc.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.0.0-rc.0/umd/react-dom.development.js"></script>
+    <script>
+        const Person = props => {
+            return (
+                React.createElement('div', {}, [
+                    React.createElement('h3', {}, [props.name]),
+                    React.createElement('h4', {}, [props.job])
+                ])
+            )
+        }
+        const App = () => {
+            // this takes three arguments the 1.component that you want to render (a string or component , it could be a functional component or a class component)
+            // 2.the second argument is an object "key value pair" contains the different attribute that we want
+            // suppose there are som many div comtainers in the project so how we will identify which div we are targeting it is done by {className: value }
+            // 3.the third argument is what we want the children to do We want to nest inside of it and typically we pass this as an array.
+            // You can pass this also as a text node, which we're going to do for the next child that we add in here,
+            return React.createElement('div', {}, [
+                React.createElement('h1', { className: 'title' }, 'React Js is Rendered'),// what we wnat the child component to do typically we pass the set of instruction in an array what we want to do 
+                React.createElement(Person, { name: 'Pravin', job: 'Full Stack Developer' }, null),
+                React.createElement(Person, { name: 'Navin', job: 'SWE @MPHASIS' }, null),
+                React.createElement(Person, { name: 'Anish', job: 'Engineer' }, null),
+                React.createElement(Person, { name: 'Ajay', job: 'Engineer @Patym' }, null),
+                React.createElement(Person, { name: 'Harman', job: 'Founder @Brand Flow ' }, null),
+            ]);
+        }
+        ReactDOM.render(
+            React.createElement(App),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
