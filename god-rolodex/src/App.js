@@ -88,6 +88,7 @@ const App = ()=>{
   const [users, setUsers] = useState([]);
 
   const[stringField , setStringField] = useState('');
+  const [title, SetTitle] = useState('');
 
   const [FilteredUsers, setFilteruser] = useState(users);
 
@@ -132,6 +133,11 @@ const filteredUsers = users.filter(user => { //
   //user => stores the users with the condition 
   // filter user will store the filtered users from the array
   
+  const onTileChange = (event) => { 
+    const searchString = event.target.value.toLowerCase(); 
+    SetTitle(searchString);
+  }
+
   useEffect(() =>{
     const newfilteredUsers = users.filter(user => { //
     return user.name.toLowerCase().includes(searchvalue);
@@ -143,21 +149,18 @@ const filteredUsers = users.filter(user => { //
   
       return (
     <div className='App'>
-      <h1 className='app-title'>Robots Rolodex</h1>
+      <h1 className='app-title'>{title}</h1>
       <div>
-
         <SearchBox 
           onchangeHandler ={onSearchChange} 
           className='User-Search-box' 
           placeholder='Search Users'
         />
-
-          <SearchBox 
-          onchangeHandler ={onStringChange} 
+        <br/>
+        <SearchBox 
+          onchangeHandler ={onTileChange} 
           placeholder='Set String'
         />
-
-
         <CardList users={filteredUsers} />
       </div>
     </div>
